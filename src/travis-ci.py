@@ -19,8 +19,10 @@ def display_repo(user_input):
         return display_repos(parts[0], parts[1])
     status = get_status(repo['last_build_result'])
     title = 'Build #%s (%s)' % (repo['last_build_number'], status)
-    timedelta = datetime.timedelta(seconds=repo['last_build_duration'])
-    subtitle = 'Duration: %s' % humanize.naturaldelta(timedelta)
+    subtitle = None
+    if repo['last_build_duration']:
+        timedelta = datetime.timedelta(seconds=repo['last_build_duration'])
+        subtitle = 'Duration: %s' % humanize.naturaldelta(timedelta)
     wf.add_item(title, subtitle,
                 arg=user_input, autocomplete=user_input, valid=True)
 
