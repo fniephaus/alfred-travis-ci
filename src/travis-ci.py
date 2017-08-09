@@ -4,6 +4,10 @@ import humanize
 from workflow import Workflow, web
 
 API_BASE_URL = 'https://api.travis-ci.org'
+# GitHub repo for self-updating
+GITHUB_UPDATE_CONF = {'github_slug': 'fniephaus/alfred-travis-ci'}
+# GitHub Issues
+HELP_URL = 'https://github.com/fniephaus/alfred-travis-ci/issues'
 
 
 def display_repo(user_input):
@@ -55,5 +59,5 @@ def get_status(res):
 
 
 if __name__ == '__main__':
-    wf = Workflow()
+    wf = Workflow(update_settings=GITHUB_UPDATE_CONF, help_url=HELP_URL)
     sys.exit(wf.run(main))
